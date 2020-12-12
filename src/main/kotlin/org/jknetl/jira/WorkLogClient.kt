@@ -16,7 +16,7 @@ class WorkLogClient(
 
     fun postWorkLogs(workLogs: List<WorkLog>) {
         workLogs.forEach {
-            val workLogResourceUrl = jiraApiUrl + "/issue/${it.issue}/worklog"
+            val workLogResourceUrl = jiraApiUrl + "issue/${it.issue}/worklog"
             try {
                 val response = Unirest.post(workLogResourceUrl)
                     .basicAuth(user, password)
