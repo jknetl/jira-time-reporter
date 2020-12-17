@@ -25,6 +25,9 @@ class WorkLogClient(
                     .queryString("notifyUsers", "false")
                     .body(it.toJsonObject())
                     .asJson()
+                /* TODO: this throws JSONNodeException if there is another error (e.g. 401 Unauthorized) as JIRA doesn't
+                *   response with json but rather HTML in this case */
+
                 if ( response.status != HttpStatus.SC_CREATED) {
                     throw WorkLogUploadException("Cannot post worklog '${it.prettyString()}' to endpoint '$workLogResourceUrl'")
                 }

@@ -1,5 +1,6 @@
 package org.jknetl.jira
 
+import java.lang.String.valueOf
 import java.nio.file.Paths
 import kotlin.system.exitProcess
 
@@ -28,7 +29,8 @@ fun main(args: Array<String>) {
     print("Enter Jira username: ")
     val user = readLine()!!
     print("Enter Jira password or token: ")
-    val password: String = (System.console()?.readPassword() ?: readLine()).toString()
+    val console = System.console()
+    val password = if (console != null) valueOf(console.readPassword()) else readLine()!!
 
     val client = WorkLogClient("https://$jiraUrl/rest/api/2/", user, password)
 
